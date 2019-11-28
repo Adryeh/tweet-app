@@ -7,6 +7,7 @@ body{
     color:white;
     display: flex;
     background-color: #253341;
+    width: 100vw;
 }
 #article{
     background-color: #15202b;
@@ -91,4 +92,10 @@ a.article-title:hover {
 }
 .post{
     height: 100vh;
+}
+.media{
+    width: 100%;
+}
+.modal{
+    color: black;
 }
