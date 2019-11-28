@@ -1,0 +1,94 @@
+body{
+
+}
+
+
+#main{
+    color:white;
+    display: flex;
+    background-color: #253341;
+}
+#article{
+    background-color: #15202b;
+    width: 60%;
+}
+#sidebar{
+    display: flex;
+    width: 20%;
+}
+.container-fluid{
+
+}
+.account-img{
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    margin: 0 15px 0 15px ;
+}
+
+
+.card-body{
+    background-color: #253341;
+    color: white;
+}
+.content-section{
+  background-color: #15202b;
+  padding: 10px 20px;
+  border: 1px solid #dddddd;
+  border-radius: 3px;
+  margin-bottom: 20px;
+  color: white;
+}
+.tweet-form{
+    display: flex;
+    flex-direction: column;
+}
+
+.article-title {
+  color: white;
+}
+.score{
+    color: yellow;
+}
+a.article-title:hover {
+  color: #428bca;
+  text-decoration: none;
+}
+
+.article-content {
+  white-space: pre-line;
+}
+
+.article-img {
+  height: 65px;
+  width: 65px;
+  margin-right: 16px;
+}
+
+.article-metadata {
+  padding-bottom: 1px;
+  margin-bottom: 4px;
+  border-bottom: 1px solid #e3e3e3
+}
+
+.article-metadata a:hover {
+  color: #333;
+  text-decoration: none;
+}
+
+.article-svg {
+  width: 25px;
+  height: 25px;
+  vertical-align: middle;
+}
+.likes{
+    color: red;
+    text-decoration: none;
+    text-underline-mode: none;
+}
+.likes:hover{
+    color: red;
+    text-decoration: none;
+    text-underline-mode: none;
+}
+.post{
+    height: 100vh;
+}
