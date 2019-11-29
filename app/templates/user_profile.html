@@ -11,7 +11,7 @@
             <div class="profile-info">
                 <h1 class="profile-username">{{ user.username }}</h1>
                 <span class="profile-email">{{ user.email }}</span>
-                <span class="profile-rankings">Rank: 12</span>
+
             </div>
             <div class="profile-buttons">
                 <a href="#" class="follow-button btn btn-secondary">Follow</a>
@@ -20,8 +20,32 @@
             </div>
         </div>
     </div>
+    <div class="content-section">
+        <div class="profile-body">
+            <div class="profile-body-name">
+                {% if user.name and user.second_name %}
+                    <span>{{ user.username }}'s name is : {{ user.name }} {{ user.second_name }}</span>
+                {% endif %}
+            </div>
+            <hr>
+            <div class="profile-body-rank">
+                <span class="profile-rankings">Rank: 12</span>
+            </div>
+            <hr>
+            <div class="profile-body-followers">
+                <span class="profile-followers">Followers: 0</span>
+            </div>
+        </div>
+    </div>
+    <div class="content-section">
+    <h2>User likes:</h2>
+        <ul class="user-likes">
+            {% for item in likes %}
+                <li class="user-like"><a href="{{ url_for('posts.post', id=item.id ) }}">{{ item.title }}</a></li>
+            {% endfor %}
+        </ul>
+    </div>
 </div>
-
 
 
 {% endblock %}

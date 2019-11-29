@@ -17,6 +17,33 @@
             {{ form.hidden_tag() }}
             <fieldset class="form-group">
                 <legend class="border-bottom">Update Account Info</legend>
+            <div class="form-group" >
+                    {{ form.name.label(class='form-control-label') }}
+
+                    {% if form.name.errors %}
+                        {{ form.name(class='form-control is-invalid') }}
+                        <div class="invalid-feedback">
+                            {% for error in form.name.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.name(class='form-control') }}
+                    {% endif %}
+                </div>
+                <div class="form-group" >
+                    {{ form.second_name.label(class='form-control-label') }}
+                    {% if form.second_name.errors %}
+                        {{ form.second_name(class='form-control is-invalid') }}
+                        <div class="invalid-feedback">
+                            {% for error in form.second_name.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.second_name(class='form-control') }}
+                    {% endif %}
+                </div>
                 <div class="form-group" >
                     {{ form.username.label(class='form-control-label') }}
 

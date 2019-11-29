@@ -2,7 +2,7 @@ from flask import render_template, url_for, request, redirect, flash
 from app import db, bcrypt
 from app.users import users
 from app.users.utils import save_picture
-from app.models import User
+from app.models import User, Post
 from app.users.forms import RegistrationForm, LoginForm, UpdateAccountForm
 from flask_login import login_user, current_user, logout_user, login_required
 
@@ -59,12 +59,16 @@ def profile(username):
             current_user.image_file = picture_file
         current_user.username = form.username.data
         current_user.email = form.email.data
+        current_user.name = form.name.data
+        current_user.second_name = form.second_name.data
         db.session.commit()
         flash('Your account has been updated', 'success')
         return redirect(url_for('users.profile' , username=username))
     elif request.method == 'GET':
         form.username.data = current_user.username
         form.email.data = current_user.email
+        form.name.data = current_user.name
+        form.second_name.data = current_user.second_name
     image_file = url_for('static', filename='profile_pics/' + current_user.image_file)
     return render_template('account.html', image_file=image_file, form=form, user=user)
 
@@ -72,4 +76,10 @@ def profile(username):
 @users.route('/user/<int:id>')
 def user_profile(id):
     user = User.query.get_or_404(id)
-    return render_template('user_profile.html', user=user)
+    posts = Post.query.all()
+    likes = []
+    user_likes = [like.post_id for like in user.liked]
+    for item in user_likes:
+        likes.append(Post.query.get(item))
+
+    return render_template('user_profile.html', user=user, likes=likes)
