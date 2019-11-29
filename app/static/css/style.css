@@ -138,19 +138,18 @@ a.article-title:hover {
 .profile-header{
     display: flex;
     flex-direction: row;
-
+    justify-content: space-between;
 }
 .profile-avatar{
     align-self: start;
 }
 .profile-info{
-    margin-left: 15px;
-    width: 60%;
+    width: 70%;
 }
 .profile-buttons{
     display: flex;
     flex-direction: column;
-    align-self: end;
+
 }
 .follow-button{
     margin: 5px;
