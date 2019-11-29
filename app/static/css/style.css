@@ -1,11 +1,12 @@
 body{
-
+    background-color: #253341;
 }
 html{
     background-color: #253341;
 }
 .navbar{
     background-color: #253341;
+    border-bottom: solid 1px white;
 }
 .menu{
     display: flex;
@@ -24,7 +25,7 @@ html{
     color: black;
 }
 #main{
-
+    padding-top: 50px;
     color:white;
     display: flex;
     background-color: #253341;
@@ -133,4 +134,24 @@ a.article-title:hover {
 }
 .search{
     margin-right: 5%;
+}
+.profile-header{
+    display: flex;
+    flex-direction: row;
+
+}
+.profile-avatar{
+    align-self: start;
+}
+.profile-info{
+    margin-left: 15px;
+    width: 60%;
+}
+.profile-buttons{
+    display: flex;
+    flex-direction: column;
+    align-self: end;
+}
+.follow-button{
+    margin: 5px;
 }

@@ -1,8 +1,6 @@
 {% extends  'layout.html' %}
 {% block title %}{{ title }}{% endblock %}
 {% block  body%}
-<main id="main">
-
 
 <div id="article" class="container-fluid">
 <div class="content-section">
@@ -31,14 +29,17 @@
                             {% endfor %}
                         </div>
                     {% else %}
-                        {{ form.text(class='form-control', placeholder="What's happening?") }}
+                        {{ form.text(class='form-control', placeholder="What's happening?", id='inp', type='text') }} <span></span>
                     {% endif %}
                 </div>
             <div class="form-group">
-                {{ form.submit(class='btn btn-outline-info') }}
+                {{ form.submit(class='btn btn-primary') }}
             </div>
       </form>
+<button class="btn btn-outline-secondary" onclick="GetLengthOfText()">Check text length</button>
+
 </div>
+
   <div class="content-section">
 
       <h2>Feed</h2>
@@ -47,7 +48,7 @@
                     <img src="{{ url_for('static', filename='profile_pics/' + post.author.image_file) }}" alt="" class="rounded-circle article-img" width="64">
                     <div class="media-body">
                         <div class="article-metadata">
-                            <a href="#" class="mr-2">{{ post.author.username }}</a>
+                            <a href="{{ url_for('users.user_profile', id=post.author.id) }}" class="mr-2">{{ post.author.username }}</a>
                             <small class="text-muted">{{ post.date_posted.strftime('%Y-%m-%d') }}</small>
                         </div>
                         <h2><a href="{{ url_for('posts.post', id=post.id) }}" class="article-title">{{ post.title }}</a></h2>
@@ -77,8 +78,11 @@
 
 
 </div>
-	
-</main>
 
-
+    <script type="text/javascript">
+        function GetLengthOfText () {
+            var input = document.getElementById("inp");
+            alert (input.textLength);
+        }
+    </script>
 {% endblock %}

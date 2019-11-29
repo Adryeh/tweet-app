@@ -1,7 +1,7 @@
 {% extends  'layout.html' %}
 {% block title %}{{ title }}{% endblock %}
 {% block  body %}
-<main id="main" class="post">
+<div class="container">
     <article class="media content-section">
         <img src="{{ url_for('static', filename='profile_pics/' + post.author.image_file) }}" alt="" class="rounded-circle article-img">
             <div class="media-body">
@@ -45,5 +45,5 @@
         </div>
       </div>
     </div>
-</main>
+</div>
 {% endblock %}

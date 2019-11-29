@@ -67,3 +67,9 @@ def profile(username):
         form.email.data = current_user.email
     image_file = url_for('static', filename='profile_pics/' + current_user.image_file)
     return render_template('account.html', image_file=image_file, form=form, user=user)
+
+
+@users.route('/user/<int:id>')
+def user_profile(id):
+    user = User.query.get_or_404(id)
+    return render_template('user_profile.html', user=user)

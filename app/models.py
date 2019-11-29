@@ -9,7 +9,6 @@ def load_user(user_id):
 
 
 class User(db.Model, UserMixin):
-    # Code
     liked = db.relationship(
         'PostLike',
         foreign_keys='PostLike.user_id',
@@ -37,6 +36,8 @@ class User(db.Model, UserMixin):
     email = db.Column(db.String, unique=True, nullable=False)
     password = db.Column(db.String, nullable=False)
     image_file = db.Column(db.String(20), nullable=False, default='default.jpg')
+    name = db.Column(db.String)
+    second_name = db.Column(db.String)
     posts = db.relationship('Post', backref='author', lazy=True)
 
 

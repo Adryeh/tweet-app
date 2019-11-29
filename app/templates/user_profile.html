@@ -1,0 +1,27 @@
+{% extends  'layout.html' %}
+{% block title %}{{ title }}{% endblock %}
+{% block  body%}
+
+<div class="container">
+    <div class="content-section">
+        <div class="profile-header">
+            <div class="profile-avatar">
+                <img src="{{ url_for('static', filename='profile_pics/' + user.image_file) }}" alt="" class="rounded-circle" width="128">
+            </div>
+            <div class="profile-info">
+                <h1 class="profile-username">{{ user.username }}</h1>
+                <span class="profile-email">{{ user.email }}</span>
+                <span class="profile-rankings">Rank: 12</span>
+            </div>
+            <div class="profile-buttons">
+                <a href="#" class="follow-button btn btn-secondary">Follow</a>
+                <a href="#" class="follow-button btn btn-secondary">Add</a>
+                <a href="#" class="follow-button btn btn-secondary">Send Message</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+{% endblock %}
