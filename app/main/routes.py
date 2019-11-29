@@ -11,7 +11,7 @@ from flask_login import current_user, login_required
 def home_page():
     form = CreatePost()
     user = User.query.filter_by(id=current_user.id).first()
-    posts = Post.query.order_by(Post.date_posted.desc())
+    posts = user.followed_posts()
     if form.validate_on_submit():
         post = Post(title=form.title.data, text=form.text.data, user_id=current_user.id)
         db.session.add(post)

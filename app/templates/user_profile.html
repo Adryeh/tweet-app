@@ -14,7 +14,13 @@
 
             </div>
             <div class="profile-buttons">
-                <a href="#" class="follow-button btn btn-secondary">Follow</a>
+                {% if user == current_user %}
+                    <a class="follow-button btn btn-secondary" href="{{ url_for('users.profile', username=current_user.username) }}">Edit your profile</a>
+                {% elif not current_user.is_following(user) %}
+                    <a class="follow-button btn btn-success" href="{{ url_for('users.follow', id=user.id) }}">Follow</a>
+                {% else %}
+                    <a class="follow-button btn btn-danger" href="{{ url_for('users.unfollow', id=user.id) }}">Unfollow</a>
+                {% endif %}
                 <a href="#" class="follow-button btn btn-secondary">Add</a>
                 <a href="#" class="follow-button btn btn-secondary">Send Message</a>
             </div>
@@ -33,18 +39,19 @@
             </div>
             <hr>
             <div class="profile-body-followers">
-                <span class="profile-followers">Followers: 0</span>
+                <span class="profile-followers">Followers: {{ user.followers.count() }}</span>
             </div>
         </div>
     </div>
     <div class="content-section">
-    <h2>User likes:</h2>
+    <h2>User likes (5) :</h2>
         <ul class="user-likes">
-            {% for item in likes %}
-                <li class="user-like"><a href="{{ url_for('posts.post', id=item.id ) }}">{{ item.title }}</a></li>
+            {% for item in user.followed_posts(5) %}
+                <li class="user-like"><a href="{{ url_for('posts.post', id=item.id) }}">{{ item.title }}</a></li>
             {% endfor %}
         </ul>
     </div>
+
 </div>
 
 

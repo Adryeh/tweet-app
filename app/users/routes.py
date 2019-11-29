@@ -76,10 +76,39 @@ def profile(username):
 @users.route('/user/<int:id>')
 def user_profile(id):
     user = User.query.get_or_404(id)
-    posts = Post.query.all()
-    likes = []
-    user_likes = [like.post_id for like in user.liked]
-    for item in user_likes:
-        likes.append(Post.query.get(item))
 
-    return render_template('user_profile.html', user=user, likes=likes)
+    return render_template('user_profile.html', user=user)
+
+
+@users.route('/follow/<int:id>')
+@login_required
+def follow(id):
+    user = User.query.filter_by(id=id).first()
+    username = User.query.get_or_404(id).username
+    if user is None:
+        flash(f'User {username} not found', 'danger')
+        return redirect(url_for('main.home_page'))
+    if user == current_user:
+        flash('You can not follow yourself', 'danger')
+        return redirect(url_for('users.user_profile', id=id))
+    current_user.follow(user)
+    db.session.commit()
+    flash(f'You are following {username}!', 'success')
+    return redirect(url_for('users.user_profile', id=id))
+
+
+@users.route('/unfollow/<int:id>')
+@login_required
+def unfollow(id):
+    user = User.query.filter_by(id=id).first()
+    username = User.query.get_or_404(id).username
+    if user is None:
+        flash(f'User {username} not found', 'danger')
+        return redirect(url_for('main.home_page'))
+    if user == current_user:
+        flash('You can not unfollow yourself', 'danger')
+        return redirect(url_for('users.user_profile', id=id))
+    current_user.unfollow(user)
+    db.session.commit()
+    flash(f'You are not following {username}', 'info')
+    return redirect(url_for('users.user_profile', id=id))
