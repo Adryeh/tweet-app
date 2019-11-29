@@ -1,5 +1,5 @@
 from flask import redirect, render_template, request, url_for, abort, flash
-from flask_login import current_user
+from flask_login import current_user, login_required
 from app import db
 from app.posts import posts
 from app.models import Post, PostLike
@@ -30,6 +30,7 @@ def like_action(post_id, action):
 
 
 @posts.route('/post/<int:post_id>/update', methods=["GET","POST"])
+@login_required
 def post_update(post_id):
     form = CreatePost()
     post = Post.query.get_or_404(post_id)
@@ -48,6 +49,7 @@ def post_update(post_id):
 
 
 @posts.route('/post/<int:post_id>/delete', methods=["GET","POST"])
+@login_required
 def post_delete(post_id):
     post = Post.query.get_or_404(post_id)
     if post.author != current_user:

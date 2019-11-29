@@ -41,6 +41,7 @@ def login():
 
 
 @users.route('/logout')
+@login_required
 def logout():
     logout_user()
     flash('See you later', 'warning')
@@ -48,6 +49,7 @@ def logout():
 
 
 @users.route('/profile/<string:username>', methods=['POST', 'GET'])
+@login_required
 def profile(username):
     user = User.query.filter_by(username=username).first()
     form = UpdateAccountForm()

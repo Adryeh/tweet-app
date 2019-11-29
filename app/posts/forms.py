@@ -7,6 +7,6 @@ from app.models import User
 
 
 class CreatePost(FlaskForm):
-    title = StringField('Title')
-    text = TextAreaField('Content')
+    title = StringField('Title', validators=[DataRequired()])
+    text = TextAreaField('Content', validators=[DataRequired(), Length(max=300)])
     submit = SubmitField('Say')

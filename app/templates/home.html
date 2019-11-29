@@ -41,9 +41,9 @@
 </div>
   <div class="content-section">
 
-      <h2>Tweets</h2>
+      <h2>Feed</h2>
           {% for post in posts %}
-                <article class="media content-section">
+                <article class="media content-section user-post">
                     <img src="{{ url_for('static', filename='profile_pics/' + post.author.image_file) }}" alt="" class="rounded-circle article-img" width="64">
                     <div class="media-body">
                         <div class="article-metadata">
@@ -69,10 +69,13 @@
                 <h5 class="card-title">{{ user.username }}</h5>
                 <p class="card-text">{{ user.email }}</p>
                 <a href="{{url_for('users.profile', username=current_user.username)}}" class="btn btn-primary">Profile</a>
+                <a href="{{url_for('users.logout')}}" class="btn btn-primary">Logout</a>
               </div>
             </div>
         </div>
         <!-- CARD END -->
+
+
 </div>
 	
 </main>

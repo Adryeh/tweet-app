@@ -1,13 +1,35 @@
 body{
 
 }
+html{
+    background-color: #253341;
+}
+.navbar{
+    background-color: #253341;
+}
+.menu{
+    display: flex;
+    flex-direction: row;
+    list-style: none;
+    margin-left: 5%;
+}
+.nav-link{
+    color: white;
+    border-radius: 5px;
+    text-decoration: none;
+}
 
-
+.nav-link:hover{
+    background-color: white;
+    color: black;
+}
 #main{
+
     color:white;
     display: flex;
     background-color: #253341;
     width: 100vw;
+
 }
 #article{
     background-color: #15202b;
@@ -16,6 +38,7 @@ body{
 #sidebar{
     display: flex;
     width: 20%;
+
 }
 .container-fluid{
 
@@ -98,4 +121,16 @@ a.article-title:hover {
 }
 .modal{
     color: black;
+}
+.user-post{
+    cursor: pointer;
+}
+.user-post:hover{
+    background-color: #253341;
+}
+.alert{
+    margin-bottom: 0 !important;
+}
+.search{
+    margin-right: 5%;
 }
