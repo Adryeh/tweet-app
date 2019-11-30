@@ -3,7 +3,7 @@
 {% block  body %}
 <div class="container">
     <article class="media content-section">
-        <img src="{{ url_for('static', filename='profile_pics/' + post.author.image_file) }}" alt="" class="rounded-circle article-img">
+        <a href="{{ url_for('users.user_profile', id=post.author.id) }}"><img src="{{ url_for('static', filename='profile_pics/' + post.author.image_file) }}" alt="" class="rounded-circle article-img"></a>
             <div class="media-body">
             <div class="article-metadata">
                 <a href="{{ url_for('users.user_profile', id=post.author.id) }}" class="mr-2 post-author-avatar">{{ post.author.username }}</a>

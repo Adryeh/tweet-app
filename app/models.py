@@ -22,15 +22,13 @@ class User(db.Model, UserMixin):
 
 
     def followed_posts(self, max_number_of_posts = None):
-        if max_number_of_posts is None:
-            followed = Post.query.join(followers, (followers.c.followed_id == Post.user_id)).filter(
-                followers.c.follower_id == self.id)
-            own = Post.query.filter_by(user_id=self.id)
-            return followed.union(own).order_by(Post.date_posted.desc())
         followed = Post.query.join(followers, (followers.c.followed_id == Post.user_id)).filter(
             followers.c.follower_id == self.id)
         own = Post.query.filter_by(user_id=self.id)
+        if max_number_of_posts is None:
+            return followed.union(own).order_by(Post.date_posted.desc())
         return followed.union(own).order_by(Post.date_posted.desc()).limit(max_number_of_posts)
+
 
     def follow(self, user):
         if not self.is_following(user):
@@ -51,11 +49,13 @@ class User(db.Model, UserMixin):
             like = PostLike(user_id=self.id, post_id=post.id)
             db.session.add(like)
 
+
     def unlike_post(self, post):
         if self.has_liked_post(post):
             PostLike.query.filter_by(
                 user_id=self.id,
                 post_id=post.id).delete()
+
 
     def has_liked_post(self, post):
         return PostLike.query.filter(

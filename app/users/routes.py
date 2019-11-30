@@ -76,8 +76,7 @@ def profile(username):
 @users.route('/user/<int:id>')
 def user_profile(id):
     user = User.query.get_or_404(id)
-
-    return render_template('user_profile.html', user=user)
+    return render_template('user_profile.html', user=user, title=user.username)
 
 
 @users.route('/follow/<int:id>')

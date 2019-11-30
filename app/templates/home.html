@@ -44,8 +44,9 @@
 
       <h2>Feed</h2>
           {% for post in posts %}
+
                 <article class="media content-section user-post">
-                    <img src="{{ url_for('static', filename='profile_pics/' + post.author.image_file) }}" alt="" class="rounded-circle article-img" width="64">
+                    <a href="{{ url_for('users.user_profile', id=post.author.id) }}"><img src="{{ url_for('static', filename='profile_pics/' + post.author.image_file) }}" alt="" class="rounded-circle article-img" width="64"></a>
                     <div class="media-body">
                         <div class="article-metadata">
                             <a href="{{ url_for('users.user_profile', id=post.author.id) }}" class="mr-2">{{ post.author.username }}</a>
@@ -65,7 +66,7 @@
           <!-- CARD START -->
         <div class="content-section">
             <div class="card" style="width: 18rem;">
-              <img src="{{ url_for('static', filename='profile_pics/' + user.image_file) }}" class="rounded-circle mx-auto d-block account-img m-4" alt="...">
+                <a href="{{ url_for('users.user_profile', id=user.id) }}"><img src="{{ url_for('static', filename='profile_pics/' + user.image_file) }}" class="rounded-circle mx-auto d-block account-img m-4" alt="..."></a>
               <div class="card-body">
                 <h5 class="card-title">{{ user.username }}</h5>
                 <p class="card-text">{{ user.email }}</p>
