@@ -63,6 +63,14 @@ class User(db.Model, UserMixin):
             PostLike.post_id == post.id).count() > 0
 
 
+    def post_likes(self, user):
+        posts = Post.query.filter_by(user_id=user.id)
+        sum = 0
+        for post in posts:
+            sum += post.get_likes_count(post.id)
+        return sum
+
+
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     username = db.Column(db.String, unique=True, nullable=False)
     email = db.Column(db.String, unique=True, nullable=False)
