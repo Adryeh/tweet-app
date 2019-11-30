@@ -85,10 +85,6 @@ class User(db.Model, UserMixin):
 
 
 class Post(db.Model):
-    def __init__(self):
-        self.id = id
-
-
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     title = db.Column(db.String)
     text = db.Column(db.Text)
