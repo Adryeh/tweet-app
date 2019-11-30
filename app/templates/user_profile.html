@@ -35,7 +35,7 @@
             </div>
             <hr>
             <div class="profile-body-rank">
-                <span class="profile-rankings">Rank: 12</span>
+                <span class="profile-rankings">Rank: {{ user.get_rank(user) + user.followers.count() }}</span>
             </div>
             <hr>
             <div class="profile-body-likes">
@@ -45,10 +45,7 @@
 
             <div class="profile-body-followers">
                 <span style="display: block" class="profile-followers">Followers: {{ user.followers.count() }}</span>
-                <span  class="profile-user-followers">Followed by:
-                    {% for follower in user.user_follower_list(user, 10) %}
-                        <a href="{{ url_for('users.user_profile', id=follower.id) }}">{{ follower.username }}</a>
-                    {% endfor %} and more</span>
+                <span  class="profile-user-followers">Followed by:</span>
             </div>
         </div>
     </div>

@@ -70,11 +70,13 @@ class User(db.Model, UserMixin):
             sum += post.get_likes_count(post.id)
         return sum
 
+
     def user_follower_list(self, user, limit=None):
-        foll = User.query.filter(followers)
-        if limit is None:
-            return [f for f in foll if f != user]
-        return [f for f in foll if f!= user][:limit]
+        pass
+
+
+    def get_rank(self, user):
+        return user.post_likes(user)
 
 
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
