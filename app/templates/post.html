@@ -23,7 +23,7 @@
   {% else %}
     <a href="{{ url_for('posts.like_action', post_id=post.id, action='like') }}"><i class="fa fa-heart-o likes"></i></a>
   {% endif %}
-    <span style="margin-left: 5px">{{ likes }}</span>
+    <span style="margin-left: 5px">{{ post.get_likes_count(post.id) }}</span>
     </article>
     <!-- Modal -->
     <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">

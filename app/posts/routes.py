@@ -8,13 +8,13 @@ from app.posts.forms import CreatePost
 
 @posts.route('/post/<int:id>', methods=["GET","POST"])
 def post(id):
-    likes = PostLike.query.filter_by(post_id=id).count()
+
     post = Post.query.get_or_404(id)
     if request.args.get("vote"):
         post.likes = post.likes + 1
         db.session.commit()
         return redirect(url_for('posts.post', id=post.id))
-    return render_template('post.html', post=post, likes=likes)
+    return render_template('post.html', post=post)
 
 
 @posts.route('/like/<int:post_id>/<action>')

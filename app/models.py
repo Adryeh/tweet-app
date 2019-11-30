@@ -85,12 +85,20 @@ class User(db.Model, UserMixin):
 
 
 class Post(db.Model):
+    def __init__(self):
+        self.id = id
+
+
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     title = db.Column(db.String)
     text = db.Column(db.Text)
     date_posted = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
     likes = db.relationship('PostLike', backref='post', lazy='dynamic')
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+
+    def get_likes_count(self, id):
+        return PostLike.query.filter(
+            PostLike.post_id == id).count()
 
 
 class PostLike(db.Model):

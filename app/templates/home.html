@@ -55,7 +55,7 @@
                         <h2><a href="{{ url_for('posts.post', id=post.id) }}" class="article-title">{{ post.title }}</a></h2>
                         <p class="article-content">{{ post.text }}</p>
                     </div>
-                    <small class="score"><i class="fa fa-star"></i> {{ post.likes.count()}}</small>
+                    <small class="score"><i class="fa fa-star"></i> {{ post.get_likes_count(post.id)}}</small>
 
             </article>
           {% endfor %}
