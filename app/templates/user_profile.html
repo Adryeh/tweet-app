@@ -45,7 +45,10 @@
 
             <div class="profile-body-followers">
                 <span style="display: block" class="profile-followers">Followers: {{ user.followers.count() }}</span>
-                <span  class="profile-user-followers">Followed by:  </span>
+                <span  class="profile-user-followers">Followed by:
+                    {% for follower in user.user_follower_list(user, 10) %}
+                        <a href="{{ url_for('users.user_profile', id=follower.id) }}">{{ follower.username }}</a>
+                    {% endfor %} and more</span>
             </div>
         </div>
     </div>

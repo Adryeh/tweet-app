@@ -1,6 +1,6 @@
 from datetime import datetime
 from app import login_manager, db
-from flask_login import UserMixin, current_user
+from flask_login import UserMixin
 
 
 @login_manager.user_loader
@@ -69,6 +69,12 @@ class User(db.Model, UserMixin):
         for post in posts:
             sum += post.get_likes_count(post.id)
         return sum
+
+    def user_follower_list(self, user, limit=None):
+        foll = User.query.filter(followers)
+        if limit is None:
+            return [f for f in foll if f != user]
+        return [f for f in foll if f!= user][:limit]
 
 
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
