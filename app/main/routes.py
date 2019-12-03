@@ -3,6 +3,7 @@ from app import db
 from app.main import main
 from app.models import User, Post, PostLike
 from app.posts.forms import CreatePost
+from app.users.utils import save_picture
 from flask_login import current_user, login_required
 
 
@@ -14,8 +15,11 @@ def home_page():
     posts = user.followed_posts()
     if form.validate_on_submit():
         post = Post(title=form.title.data, text=form.text.data, user_id=current_user.id)
-        db.session.add(post)
-        db.session.commit()
-        flash('Posted', 'success')
-        return redirect(url_for('main.home_page'))
+        try:
+            db.session.add(post)
+            db.session.commit()
+            flash('Posted', 'success')
+            return redirect(url_for('main.home_page'))
+        except:
+            return 'DB ERROR'
     return render_template('home.html', title='Home Page', user=user, form=form, posts=posts)

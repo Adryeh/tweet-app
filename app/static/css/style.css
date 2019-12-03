@@ -28,7 +28,7 @@ html{
     padding-top: 50px;
     color:white;
     display: flex;
-    background-color: #253341;
+    background-color:#a7b5d1;
     width: 100vw;
 
 }
@@ -153,4 +153,14 @@ a.article-title:hover {
 }
 .follow-button{
     margin: 5px;
+}
+.users{
+    display: flex;
+    flex-direction: row;
+}
+.user-block{
+    padding: 5px;
+    margin: 25px;
+    border: solid 1px lightgray;
+    border-radius: 15px;
 }

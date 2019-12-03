@@ -16,10 +16,13 @@ def register():
     if form.validate_on_submit():
         hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
         user = User(username=form.username.data, email=form.email.data, password=hashed_password)
-        db.session.add(user)
-        db.session.commit()
-        flash('Your account has been created', 'success')
-        return redirect(url_for('users.login'))
+        try:
+            db.session.add(user)
+            db.session.commit()
+            flash('Your account has been created', 'success')
+            return redirect(url_for('users.login'))
+        except:
+            return 'DB ERROR'
     return render_template('register.html', form=form)
 
 
@@ -48,7 +51,7 @@ def logout():
     return redirect(url_for('users.login'))
 
 
-@users.route('/profile/<string:username>', methods=['POST', 'GET'])
+@users.route('/profile/<string:username>/edit', methods=['POST', 'GET'])
 @login_required
 def profile(username):
     user = User.query.filter_by(username=username).first()
@@ -111,3 +114,10 @@ def unfollow(id):
     db.session.commit()
     flash(f'You are not following {username}', 'info')
     return redirect(url_for('users.user_profile', id=id))
+
+
+@users.route('/users')
+@login_required
+def users_list():
+    users = User.query.all()
+    return render_template('users.html', users=users)

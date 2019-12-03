@@ -8,7 +8,6 @@ from app.posts.forms import CreatePost
 
 @posts.route('/post/<int:id>', methods=["GET","POST"])
 def post(id):
-
     post = Post.query.get_or_404(id)
     if request.args.get("vote"):
         post.likes = post.likes + 1

@@ -105,6 +105,7 @@ class Post(db.Model):
     title = db.Column(db.String)
     text = db.Column(db.Text)
     date_posted = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+    picture = db.Column(db.String(20))
     likes = db.relationship('PostLike', backref='post', lazy='dynamic')
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
 
