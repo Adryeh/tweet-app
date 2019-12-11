@@ -124,32 +124,6 @@ def users_list():
     return render_template('users.html', users=users)
 
 
-@users.route('/send_message/<recipient>', methods=['GET', 'POST'])
-@login_required
-def send_message(recipient):
-    user = User.query.filter_by(username=recipient).first_or_404()
-    form = MessageForm()
-    if form.validate_on_submit():
-        msg = Message(author=current_user, recipient=user,
-                      body=form.message.data)
-        db.session.add(msg)
-        db.session.commit()
-        flash('Your message has been sent!', 'success')
-        return redirect(url_for('users.user_profile', id=user.id))
-    return render_template('send_message.html', form=form, recipient=recipient)
-
-
-@users.route('/messages/')
-@login_required
-def messages():
-
-
-    messages = current_user.messages_received.order_by(Message.timestamp.desc())
-
-    messages_len = current_user.messages_received.count()
-    return render_template('messages.html', messages=messages, messages_len=messages_len)
-
-
 @users.route('/dialog/<int:id>', methods=['GET', 'POST'])
 @login_required
 def chat(id):

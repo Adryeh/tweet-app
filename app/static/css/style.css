@@ -192,13 +192,16 @@ a.article-title:hover {
 
 .dialog{
     width: 50%;
-    height: 70vh;
     padding: 55px;
     border: solid 1px gray;
-    display: flex;
-    flex-direction: column;
+
     background-color: #253341;;
     margin-bottom: 50px;
+
+}
+.messages{
+    display: flex;
+    flex-direction: column;
 }
 .msg{
     display: flex;
@@ -226,7 +229,6 @@ a.article-title:hover {
 .conv-user-list{
     margin-left: 20%;
     width: 10%;
-    height: 70vh;
     border: solid 1px gray;
     display: flex;
     flex-direction: column;
@@ -244,4 +246,13 @@ a.article-title:hover {
 .user-msg{
     border-bottom: solid 1px gray;
     flex: 1;
+}
+.msg-recipient{
+    align-self: flex-end;
+}
+.msg-author{
+    align-self: flex-start;
+}
+.msg-form{
+    margin-top: 25px;
 }
