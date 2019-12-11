@@ -22,7 +22,11 @@
                     <a class="follow-button btn btn-danger" href="{{ url_for('users.unfollow', id=user.id) }}">Unfollow</a>
                 {% endif %}
                 <a href="#" class="follow-button btn btn-secondary">Add</a>
-                <a href="#" class="follow-button btn btn-secondary">Send Message</a>
+                {% if user != current_user %}
+                    <a href="{{ url_for('users.chat', id=user.id) }}" class="follow-button btn btn-secondary">Send Message</a>
+                {% else %}
+
+                {% endif %}
             </div>
         </div>
     </div>

@@ -5,6 +5,7 @@ from flask_login import LoginManager
 from app.config import Config
 from flask_migrate import Migrate
 from datetime import timedelta
+from flask_socketio import SocketIO
 
 
 db = SQLAlchemy()
@@ -16,12 +17,13 @@ login_manager.refresh_view = 'relogin'
 login_manager.needs_refresh_message = (u"Session timedout, please re-login")
 login_manager.session_protection = "strong"
 login_manager.login_message_category = 'info'
+socketio = SocketIO()
 
 
-def create_app(config_class=Config):
+def create_app(config_class=Config, debug=False):
     app = Flask(__name__)
     app.config.from_object(Config)
-
+    app.debug = debug
 
     @app.before_request
     def before_request():
@@ -33,11 +35,13 @@ def create_app(config_class=Config):
     bcrypt.init_app(app)
     login_manager.init_app(app)
     migrate.init_app(app, db)
+    socketio.init_app(app)
 
 
     from app.users.routes import users
     from app.main.routes import main
     from app.posts.routes import posts
+
 
     app.register_blueprint(users)
     app.register_blueprint(main)

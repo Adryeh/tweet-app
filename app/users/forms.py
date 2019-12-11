@@ -1,7 +1,7 @@
 from flask_login import current_user
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileAllowed
-from wtforms import SubmitField, TextField, PasswordField, StringField, BooleanField, FileField
+from wtforms import SubmitField, TextAreaField, PasswordField, StringField, BooleanField, FileField
 from  wtforms.validators import DataRequired, Email, EqualTo, Length, ValidationError
 from app.models import User
 
@@ -51,3 +51,8 @@ class UpdateAccountForm(FlaskForm):
             user = User.query.filter_by(email=email.data).first()
             if user:
                 raise ValidationError('That email exists. Please choose another!')
+
+
+class MessageForm(FlaskForm):
+    message = TextAreaField('Message', validators=[DataRequired(), Length(min=0, max=140)])
+    submit = SubmitField('Send')

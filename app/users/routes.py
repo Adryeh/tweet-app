@@ -1,9 +1,10 @@
-from flask import render_template, url_for, request, redirect, flash
+from datetime import datetime
+from flask import render_template, url_for, request, redirect, flash, jsonify
 from app import db, bcrypt
 from app.users import users
 from app.users.utils import save_picture
-from app.models import User, Post
-from app.users.forms import RegistrationForm, LoginForm, UpdateAccountForm
+from app.models import User, Post, Message
+from app.users.forms import RegistrationForm, LoginForm, UpdateAccountForm, MessageForm
 from flask_login import login_user, current_user, logout_user, login_required
 
 
@@ -121,3 +122,50 @@ def unfollow(id):
 def users_list():
     users = User.query.all()
     return render_template('users.html', users=users)
+
+
+@users.route('/send_message/<recipient>', methods=['GET', 'POST'])
+@login_required
+def send_message(recipient):
+    user = User.query.filter_by(username=recipient).first_or_404()
+    form = MessageForm()
+    if form.validate_on_submit():
+        msg = Message(author=current_user, recipient=user,
+                      body=form.message.data)
+        db.session.add(msg)
+        db.session.commit()
+        flash('Your message has been sent!', 'success')
+        return redirect(url_for('users.user_profile', id=user.id))
+    return render_template('send_message.html', form=form, recipient=recipient)
+
+
+@users.route('/messages/')
+@login_required
+def messages():
+
+
+    messages = current_user.messages_received.order_by(Message.timestamp.desc())
+
+    messages_len = current_user.messages_received.count()
+    return render_template('messages.html', messages=messages, messages_len=messages_len)
+
+
+@users.route('/dialog/<int:id>', methods=['GET', 'POST'])
+@login_required
+def chat(id):
+    form = MessageForm()
+    current_user.last_message_read_time = datetime.utcnow()
+    db.session.commit()
+    users = User.query.all()
+    companion = User.query.get_or_404(id)
+    own_msg = Message.query.filter_by(recipient_id=id).filter_by(sender_id=current_user.id)
+    companion_msg = Message.query.filter_by(sender_id=id).filter_by(recipient_id=current_user.id)
+    dialog = own_msg.union(companion_msg).order_by(Message.timestamp).all()
+    if form.validate_on_submit():
+        msg = Message(author=current_user, recipient=companion,
+                      body=form.message.data)
+        db.session.add(msg)
+        db.session.commit()
+        flash('Your message has been sent!', 'success')
+        return redirect(url_for('users.chat', id=companion.id))
+    return render_template('chat.html', companion=companion, dialog=dialog, users=users, form=form)

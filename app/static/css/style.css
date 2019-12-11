@@ -4,6 +4,25 @@ body{
 html{
     background-color: #253341;
 }
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
 .navbar{
     background-color: #253341;
     border-bottom: solid 1px white;
@@ -163,4 +182,66 @@ a.article-title:hover {
     margin: 25px;
     border: solid 1px lightgray;
     border-radius: 15px;
+}
+.chat{
+
+}
+.messages{
+    height: 50vh;
+}
+
+.dialog{
+    width: 50%;
+    height: 70vh;
+    padding: 55px;
+    border: solid 1px gray;
+    display: flex;
+    flex-direction: column;
+    background-color: #253341;;
+    margin-bottom: 50px;
+}
+.msg{
+    display: flex;
+    flex-direction: column;
+}
+.msg-recipient > span{
+    align-self: flex-end;
+}
+.msg-recipient > img{
+    align-self: flex-end;
+
+}
+.msg-author > span{
+    align-self: flex-start;
+}
+.msg-author > img{
+    align-self: flex-start;
+
+}
+.dialog-cont{
+    margin: 0 auto;
+    display: flex;
+
+}
+.conv-user-list{
+    margin-left: 20%;
+    width: 10%;
+    height: 70vh;
+    border: solid 1px gray;
+    display: flex;
+    flex-direction: column;
+    flex-flow: column wrap;
+    background-color: #253341;
+    margin-bottom: 50px;
+    padding: 5px;
+}
+
+.user-msg:hover{
+    border-bottom: solid 1px gray;
+    flex: 1;
+    background-color: #a7b5d1;
+}
+.user-msg{
+    border-bottom: solid 1px gray;
+    flex: 1;
 }
