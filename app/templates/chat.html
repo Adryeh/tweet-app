@@ -13,7 +13,7 @@
         {% endfor %}
 	</div>
 	<div id="dialog" class="dialog">
-        <div class="messages overflow-auto">
+        <div id="messages" class="messages overflow-auto">
                 {% for msg in dialog %}
                 {% if msg.recipient == current_user %}
                     <div class="msg msg-author">
@@ -57,7 +57,7 @@
 </div>
 
 <script type="text/javascript">
-      var block = document.getElementById("dialog");
+      var block = document.getElementById("messages");
       block.scrollTop = block.scrollHeight;
 </script>
 {% endblock %}

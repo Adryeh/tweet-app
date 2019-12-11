@@ -1,9 +1,9 @@
 from datetime import datetime
-from flask import render_template, url_for, request, redirect, flash, jsonify
+from flask import render_template, url_for, request, redirect, flash
 from app import db, bcrypt
 from app.users import users
 from app.users.utils import save_picture
-from app.models import User, Post, Message
+from app.models import User, Message
 from app.users.forms import RegistrationForm, LoginForm, UpdateAccountForm, MessageForm
 from flask_login import login_user, current_user, logout_user, login_required
 
