@@ -41,10 +41,11 @@ def create_app(config_class=Config, debug=False):
     from app.users.routes import users
     from app.main.routes import main
     from app.posts.routes import posts
-
+    from app.chat.routes import chat
 
     app.register_blueprint(users)
     app.register_blueprint(main)
     app.register_blueprint(posts)
+    app.register_blueprint(chat)
 
     return app

@@ -22,15 +22,8 @@
         <li class="nav-item">
         <a class="nav-link" href="{{ url_for('users.user_profile', id=current_user.id) }}">Profile</a>
       </li>
-        <li class="nav-item">
-        <a class="nav-link" href="{{ url_for('users.chat', id=current_user.id) }}">Messages
-                        {% set new_messages = current_user.new_messages() %}
-                        <span id="message_count" class="badge badge-light"
-                              style="visibility: {% if new_messages %}visible
-                                                 {% else %}hidden {% endif %};">
-                            {{ new_messages }}
-                        </span>
-                        </a>
+      <li class="nav-item">
+        <a class="nav-link" href="{{ url_for('chat.enter') }}">Enter chat</a>
       </li>
         {% else %}
       <li class="nav-item">

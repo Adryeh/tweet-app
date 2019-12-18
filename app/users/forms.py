@@ -52,7 +52,3 @@ class UpdateAccountForm(FlaskForm):
             if user:
                 raise ValidationError('That email exists. Please choose another!')
 
-
-class MessageForm(FlaskForm):
-    message = TextAreaField('Message', validators=[DataRequired(), Length(min=0, max=140)])
-    submit = SubmitField('Send')

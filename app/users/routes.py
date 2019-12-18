@@ -4,7 +4,7 @@ from app import db, bcrypt
 from app.users import users
 from app.users.utils import save_picture
 from app.models import User, Message
-from app.users.forms import RegistrationForm, LoginForm, UpdateAccountForm, MessageForm
+from app.users.forms import RegistrationForm, LoginForm, UpdateAccountForm
 from flask_login import login_user, current_user, logout_user, login_required
 
 
@@ -122,24 +122,3 @@ def unfollow(id):
 def users_list():
     users = User.query.all()
     return render_template('users.html', users=users)
-
-
-@users.route('/dialog/<int:id>', methods=['GET', 'POST'])
-@login_required
-def chat(id):
-    form = MessageForm()
-    current_user.last_message_read_time = datetime.utcnow()
-    db.session.commit()
-    users = User.query.all()
-    companion = User.query.get_or_404(id)
-    own_msg = Message.query.filter_by(recipient_id=id).filter_by(sender_id=current_user.id)
-    companion_msg = Message.query.filter_by(sender_id=id).filter_by(recipient_id=current_user.id)
-    dialog = own_msg.union(companion_msg).order_by(Message.timestamp).all()
-    if form.validate_on_submit():
-        msg = Message(author=current_user, recipient=companion,
-                      body=form.message.data)
-        db.session.add(msg)
-        db.session.commit()
-        flash('Your message has been sent!', 'success')
-        return redirect(url_for('users.chat', id=companion.id))
-    return render_template('chat.html', companion=companion, dialog=dialog, users=users, form=form)

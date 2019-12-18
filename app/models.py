@@ -1,8 +1,15 @@
 import json
 from time import time
+from flask_login import AnonymousUserMixin
 from datetime import datetime
 from app import login_manager, db
 from flask_login import UserMixin
+
+
+
+class Anonymous(AnonymousUserMixin):
+  def __init__(self):
+    self.username = 'Guest'
 
 
 @login_manager.user_loader
