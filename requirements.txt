@@ -18,7 +18,7 @@ gevent-socketio==0.3.6
 gevent-websocket==0.10.1
 greenlet==0.4.15
 itsdangerous==1.1.0
-Jinja2==2.10.3
+Jinja2==2.11.3
 Mako==1.1.0
 MarkupSafe==1.1.1
 monotonic==1.5
